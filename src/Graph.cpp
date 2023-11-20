@@ -47,10 +47,10 @@ class CityGraph {
       CityNode* city = new CityNode(id, code, name, ppl, elevation);
       NodeList.push_back(city);
    }
-   
+
    //Commit 1
    void delete_city(string id){
-      //Given a list, must delete a node using a id. 
+      //Given a list, must delete a node using a  id. 
    }
    
    //Commit 2

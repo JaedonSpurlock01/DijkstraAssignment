@@ -30,7 +30,7 @@ main(int argc, char **argv)
         unsigned population = std::stoi(parsedCities[i][3]);
         int elevation = std::stoi(parsedCities[i][4]);
 
-        // cities.add_city(id, code, name, population, elevation);
+        cities.add_city(id, code, name, population, elevation);
     }
 
     // Add routes from road.txt
@@ -41,7 +41,7 @@ main(int argc, char **argv)
         unsigned to_city = parsedRoutes[i][1];
         unsigned distance = parsedRoutes[i][2];
 
-        // cities.add_connection(from_city, to_city, distance);
+        cities.add_connection(from_city, to_city, distance);
     }
 
     // Process command line args

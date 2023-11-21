@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <list>
@@ -33,6 +34,11 @@ public:
       this->_population = ppl;
       this->_elevation = elevation;
    }
+
+   list<pair<CityNode *, unsigned>> fetch_neighbors()
+   {
+      return this->neighbors;
+   }
 };
 
 /**
@@ -59,6 +65,8 @@ public:
    {
       CityNode *city = new CityNode(id, code, name, ppl, elevation);
       NodeList[id] = city;
+
+      cout << "Added " << name << " to the list of cities\n";
    }
 
    // Remove the city from the list of cities
@@ -75,7 +83,9 @@ public:
 
       // Create a tuple with the qualities (target, weight)
       auto new_edge = make_pair(to_city, distance);
-      from_city->neighbors.push_back(new_edge);
+      from_city->fetch_neighbors().push_back(new_edge);
+
+      cout << "Added a route from " << from_city_code << " to " << to_city_code << " with a distance of " << distance << "\n";
    }
 
    // Remove a route between cities (HARD, requires removal from list)

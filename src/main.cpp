@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "graph.hpp"
+#include "graph.cpp"
 #include "parsing.cpp"
 #include <vector>
 
@@ -11,10 +11,11 @@ main(int argc, char **argv)
     std::cout << "-----------------------------------------------------\n";
 
     // Load city data
-    ifstream citiesFile("city.txt");
-    ifstream routesFile("road.txt");
+    ifstream citiesFile("../lib/cities.txt");
+    ifstream routesFile("../lib/routes.txt");
     if (!citiesFile || !routesFile)
     {
+        std::cout << "File not found\n";
         return 1; // Files are required
     }
 
@@ -29,23 +30,23 @@ main(int argc, char **argv)
         unsigned population = std::stoi(parsedCities[i][3]);
         int elevation = std::stoi(parsedCities[i][4]);
 
-        cities.add_city(id, code, name, population, elevation);
+        // cities.add_city(id, code, name, population, elevation);
     }
 
     // Add routes from road.txt
-    std::vector<std::vector<std::string>> parsedRoutes = parse_routes_file(routesFile);
+    std::vector<std::vector<unsigned>> parsedRoutes = parse_routes_file(routesFile);
     for (int i = 0; i < parsedRoutes.size(); i++)
     {
         unsigned from_city = parsedRoutes[i][0];
         unsigned to_city = parsedRoutes[i][1];
         unsigned distance = parsedRoutes[i][2];
 
-        cities.add_connection(from_city, to_city, distance);
+        // cities.add_connection(from_city, to_city, distance);
     }
 
     // Process command line args
-    std::string starting_city = argv[0];
-    std::string target_city = argv[1];
+    // std::string starting_city = argv[0];
+    // std::string target_city = argv[1];
 
     // Program termination
     citiesFile.close();

@@ -22,7 +22,7 @@ private:
     *  Linked-list of neighbors
     *  Each node in the list has a tuple with (neighbor, distance_to_neighbor)
     */
-   list < pair<CityNode *, unsigned> neighbors;
+   list<pair<CityNode *, unsigned>> neighbors;
 
 public:
    CityNode(string id, string code, string name, unsigned int ppl, int elevation)

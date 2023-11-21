@@ -1,13 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include "graph.cpp"
+#include "graph.hpp"
+#include "parsing.cpp"
 #include <vector>
-
-// Implement later, should return an array of arrays where each array has the corresponding city data
-vector<vector<std::string>> parse_cities_file(istream &file);
-
-// Implement later, should return an array of arrays where each array has the corresponding route data
-vector<vector<unsigned>> parse_routes_file(istream &file);
 
 main(int argc, char **argv)
 {
@@ -23,9 +18,9 @@ main(int argc, char **argv)
         return 1; // Files are required
     }
 
-    // Add cities
+    // Add cities from city.txt
     CityGraph cities = CityGraph();
-    vector<vector<std::string>> parsedCities = parse_cities_file(citiesFile);
+    std::vector<std::vector<std::string>> parsedCities = parse_cities_file(citiesFile);
     for (int i = 0; i < parsedCities.size(); i++)
     {
         std::string id = parsedCities[i][0];
@@ -37,7 +32,16 @@ main(int argc, char **argv)
         cities.add_city(id, code, name, population, elevation);
     }
 
-    // Add routes
+    // Add routes from road.txt
+    std::vector<std::vector<std::string>> parsedRoutes = parse_routes_file(routesFile);
+    for (int i = 0; i < parsedRoutes.size(); i++)
+    {
+        unsigned from_city = parsedRoutes[i][0];
+        unsigned to_city = parsedRoutes[i][1];
+        unsigned distance = parsedRoutes[i][2];
+
+        cities.add_connection(from_city, to_city, distance);
+    }
 
     // Process command line args
     std::string starting_city = argv[0];

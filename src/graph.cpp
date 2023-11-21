@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <list>
+#include <unordered_map>
 
 using namespace std;
 
@@ -14,6 +16,12 @@ private:
    unsigned int _population = -1;
    int _elevation = -1;
    int shortest_distance = INT8_MAX;
+
+   /*
+    * [IMPORTANT]
+    *  Linked-list of neighbors
+    */
+   list<CityNode *> neighbors;
 
 public:
    CityNode(string id, string code, string name, unsigned int ppl, int elevation)
@@ -37,29 +45,36 @@ class CityGraph
 {
 
 private:
-   vector<CityNode *> NodeList;
+   // vector version of graph (stable)
+   // vector<CityNode *> NodeList;
+
+   // untested map version of graph (unstable)
+   // A city code maps to a city node
+   unordered_map<string, CityNode *> NodeList;
 
 public:
-   // Commit G-0
+   // Add a city to the list of cities
    void add_city(string id, string code, string name, unsigned int ppl, int elevation)
    {
       CityNode *city = new CityNode(id, code, name, ppl, elevation);
-      NodeList.push_back(city);
+      NodeList[id] = city;
    }
 
-   // Commit 1
+   // Remove the city from the list of cities
    void delete_city(string id)
    {
       // Given a list, must delete a node using a  id.
    }
 
-   // Commit 2
-   void add_connection()
+   // Add a route between cities (DOESNT USE DISTANCE YET)
+   void add_connection(unsigned from_city_code, unsigned to_city_code, unsigned distance)
    {
-      // Establish connection using getters and setters between two nodes.
+      CityNode *from_city = this->NodeList[to_string(from_city_code)];
+      CityNode *to_city = this->NodeList[to_string(to_city_code)];
+      from_city->neighbors.push_back(to_city);
    }
 
-   // Commit 3
+   // Remove a route between cities (HARD, requires removal from list)
    void delete_connection()
    {
       // Given two nodes, erase the connection between them

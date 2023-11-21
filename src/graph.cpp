@@ -20,8 +20,9 @@ private:
    /*
     * [IMPORTANT]
     *  Linked-list of neighbors
+    *  Each node in the list has a tuple with (neighbor, distance_to_neighbor)
     */
-   list<CityNode *> neighbors;
+   list < pair<CityNode *, unsigned> neighbors;
 
 public:
    CityNode(string id, string code, string name, unsigned int ppl, int elevation)
@@ -66,12 +67,15 @@ public:
       // Given a list, must delete a node using a  id.
    }
 
-   // Add a route between cities (DOESNT USE DISTANCE YET)
+   // Add a route between cities
    void add_connection(unsigned from_city_code, unsigned to_city_code, unsigned distance)
    {
       CityNode *from_city = this->NodeList[to_string(from_city_code)];
       CityNode *to_city = this->NodeList[to_string(to_city_code)];
-      from_city->neighbors.push_back(to_city);
+
+      // Create a tuple with the qualities (target, weight)
+      auto new_edge = make_pair(to_city, distance);
+      from_city->neighbors.push_back(new_edge);
    }
 
    // Remove a route between cities (HARD, requires removal from list)

@@ -31,13 +31,9 @@ std::vector<std::vector<unsigned>> parse_routes_file(std::istream &file)
     std::vector<std::vector<unsigned>> routes;
     unsigned from_city = 0, to_city = 0, distance = 0;
 
-    while (file >> from_city)
+    while (file >> from_city >> to_city >> distance)
     {
         std::vector<unsigned> route;
-
-        file >> to_city;
-        file >> distance;
-
         route.push_back(from_city);
         route.push_back(to_city);
         route.push_back(distance);

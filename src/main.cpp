@@ -75,6 +75,7 @@ int main(int argc, char **argv)
     }
 
     cities.print_shortest_path_between("AN", "YX");
+    cities.print_shortest_path_between("AN", "XX");
 
     // Process command line args
     // std::string starting_city = argv[0];

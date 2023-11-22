@@ -166,9 +166,9 @@ public:
       for(int i = 0; i < neighbors; i++){
          city->get_neighbor_at(i).first->delete_neighbor(city);
       }
-
+ 
       for(int i = 0; i < neighbors; i++){
-         city->delete_neighbor_at(i);
+       city->delete_neighbor_at(i);
       }
    }
 

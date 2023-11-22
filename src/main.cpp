@@ -60,7 +60,7 @@ int main(int argc, char **argv)
         unsigned population = std::stoi(parsedCities[i][3]);
         int elevation = std::stoi(parsedCities[i][4]);
 
-        cities.add_city(id, code, name, population, elevation);
+         cities.add_city(id, code, name, population, elevation);
     }
 
     // Add routes from road.txt

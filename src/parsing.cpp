@@ -21,7 +21,7 @@ std::vector<std::vector<std::string>> parse_cities_file(std::istream &file)
         cities.push_back(city);
     }
 
-    return cities;
+     return cities;
 }
 
 // Parses routes/roads file and returns a vector of vectors where

@@ -26,14 +26,15 @@ string verify_commandline_args(int argc, char **argv)
 int main(int argc, char **argv)
 { // Check and verify args validity
 
-     string verified = verify_commandline_args(argc, argv);
+    string verified = verify_commandline_args(argc, argv);
 
-     if(verified != "true"){
-         //Return and quite the program on incorrect arguments
-         cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl;
-         cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl;
-         return 1;
-     }
+    if (verified != "true")
+    {
+        // Return and quite the program on incorrect arguments
+        cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl;
+        cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m" << endl;
+        return 1;
+    }
 
     // Program summary
     std::cout << "Authors: Jaedon & Yashaswi\nDate: 11/x/2023\nCourse: CS311 (Data Structures and Algorithms)\nDescription: Program to find the shortest route between cities\n";
@@ -73,22 +74,23 @@ int main(int argc, char **argv)
 
         cities.add_connection(from_city, to_city, distance);
     }
-    
-    //Checking if the arguments exist or not in the hashmap
-    bool verify = true; 
-    if(cities.search_by_city_id(argv[1]) == false){
-        cout << "Invalid city code: "  << argv[1] << endl;
-        verify = false; 
+
+    // Checking if the arguments exist or not in the hashmap
+    bool verify = true;
+    if (cities.search_by_city_id(argv[1]) == false)
+    {
+        cout << "Invalid city code: " << argv[1] << endl;
+        verify = false;
     }
-    
-    
-    if(cities.search_by_city_id(argv[2]) == false){
+
+    if (cities.search_by_city_id(argv[2]) == false)
+    {
         cout << "Invalid city code: " << argv[2] << endl;
-        verify = false; 
+        verify = false;
     }
 
-    if(verify == false) return 0; 
-
+    if (verify == false)
+        return 0;
 
     cities.print_shortest_path_between(argv[1], argv[2]);
 

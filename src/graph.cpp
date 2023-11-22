@@ -19,7 +19,7 @@ private:
    string _city_name = "";
    unsigned int _population = -1;
    int _elevation = -1;
-   int _total_neighbors = 0; 
+   int _total_neighbors = 0;
 
    /*
     * [IMPORTANT]
@@ -48,27 +48,31 @@ public:
       return this->_city_name;
    }
 
+   pair<CityNode *, unsigned> get_neighbor_at(int index)
+   {
 
-   pair<CityNode*, unsigned> get_neighbor_at(int index){
-       
-       int i = 0; 
-       for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, i++) {
-          //std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
-          if(i == index) return *it; 
-       }
- 
+      int i = 0;
+      for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, i++)
+      {
+         // std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
+         if (i == index)
+            return *it;
+      }
    }
 
-   int search_neighbor(CityNode* city){
-       
-      int index = 0; 
-      for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, index++) {
-          //std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
-          
-          if(it->first == city){
-            return index; 
-          }
-       }
+   int search_neighbor(CityNode *city)
+   {
+
+      int index = 0;
+      for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, index++)
+      {
+         // std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
+
+         if (it->first == city)
+         {
+            return index;
+         }
+      }
 
       return -1;
    }
@@ -88,46 +92,52 @@ public:
 
       return false;
    }
-   
-   bool delete_neighbor(CityNode* city){
-      this->delete_neighbor_at(this->search_neighbor(city)); 
+
+   bool delete_neighbor(CityNode *city)
+   {
+      this->delete_neighbor_at(this->search_neighbor(city));
    }
 
-   pair<CityNode*, unsigned> get_neighbor(CityNode* city){
+   pair<CityNode *, unsigned> get_neighbor(CityNode *city)
+   {
       return this->get_neighbor_at(this->search_neighbor(city));
    }
 
    void add_neighbor(pair<CityNode *, unsigned> new_edge)
    {
       this->neighbors.push_back(new_edge);
-      this->_total_neighbors++; 
+      this->_total_neighbors++;
    }
 
-   int get_total_neighbors(){
-      return this->_total_neighbors; 
+   int get_total_neighbors()
+   {
+      return this->_total_neighbors;
    }
 
-   string get_id(){
-      return this->_ID; 
+   string get_id()
+   {
+      return this->_ID;
    }
 
-   string get_city_code(){
-      return this->_city_code; 
+   string get_city_code()
+   {
+      return this->_city_code;
    }
 
-   string get_city_name(){
-      return this->_city_name; 
+   string get_city_name()
+   {
+      return this->_city_name;
    }
 
-   unsigned int get_population(){
-      return this->_population; 
+   unsigned int get_population()
+   {
+      return this->_population;
    }
 
-   int get_elevation(){
-      return this->_elevation; 
+   int get_elevation()
+   {
+      return this->_elevation;
    }
-
-
 };
 
 /**
@@ -151,24 +161,24 @@ public:
       CityNode *city = new CityNode(id, code, name, ppl, elevation);
       NodeList[code] = city;
       id_to_code[id] = code;
-
-      // cout << "Added " << name << " to the list of cities\n";
    }
 
    // Remove the city from the list of cities
    void delete_city(string id)
    {
       // Given a list, must delete a node using a id.
-      CityNode* city = this->NodeList[id];
-      
-      int neighbors = city->get_total_neighbors(); 
-      
-      for(int i = 0; i < neighbors; i++){
+      CityNode *city = this->NodeList[id];
+
+      int neighbors = city->get_total_neighbors();
+
+      for (int i = 0; i < neighbors; i++)
+      {
          city->get_neighbor_at(i).first->delete_neighbor(city);
       }
- 
-      for(int i = 0; i < neighbors; i++){
-       city->delete_neighbor_at(i);
+
+      for (int i = 0; i < neighbors; i++)
+      {
+         city->delete_neighbor_at(i);
       }
    }
 
@@ -186,8 +196,6 @@ public:
 
       // Add new connection to source node (directed-graph, so we don't need to do same for target node)
       from_city->add_neighbor(new_edge);
-
-      // cout << "Added a route from " << from_city->fetch_city_name() << " to " << to_city->fetch_city_name() << " with a distance of " << distance << "\n";
    }
 
    // Remove a route between cities (HARD, requires removal from list)
@@ -199,11 +207,10 @@ public:
       CityNode *target = this->NodeList[target_city_code];
 
       int index = source->search_neighbor(target);
-      if(index > -1){
-          source->delete_neighbor_at(index);
+      if (index > -1)
+      {
+         source->delete_neighbor_at(index);
       }
-  
-         
    }
 
    bool search_by_city_id(string id)
@@ -313,7 +320,6 @@ public:
          // If the target city is found
          if (current_city == target_city)
          {
-
             vector<std::string> shortest_path = construct_shortest_path(previous_city, source_city, target_city);
             unsigned shortest_path_distance = distance_from_source[target_city];
             return make_pair(shortest_path, shortest_path_distance);
@@ -325,12 +331,12 @@ public:
             CityNode *neighbor = neighbor_pair.first;
             unsigned distance_to_neighbor = neighbor_pair.second;
 
-            if (!cities_visited.count(neighbor))
+            if (cities_visited.find(neighbor) == cities_visited.end())
             {
                unsigned distance_to_neighbor_from_source = distance_from_source[current_city] + distance_to_neighbor;
 
                // Relaxation of nodes
-               if (distance_to_neighbor < distance_from_source[neighbor])
+               if (distance_to_neighbor_from_source < distance_from_source[neighbor])
                {
                   distance_from_source[neighbor] = distance_to_neighbor_from_source;
                   previous_city[neighbor] = current_city;

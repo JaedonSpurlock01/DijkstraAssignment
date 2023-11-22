@@ -20,20 +20,20 @@ string verify_commandline_args(int argc, char **argv)
         Verified = "cmd args are less than 3";
     }
 
-    return Verified; 
+    return Verified;
 }
 
 int main(int argc, char **argv)
 { // Check and verify args validity
 
-     string verified = verify_commandline_args(argc, argv);
+    //  string verified = verify_commandline_args(argc, argv);
 
-     if(verified != "true"){
-         //Return and quite the program on incorrect arguments
-         cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl;
-         cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl;
-         return 1;
-     }
+    //  if(verified != "true"){
+    //      //Return and quite the program on incorrect arguments
+    //      cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl;
+    //      cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl;
+    //      return 1;
+    //  }
 
     // Program summary
     std::cout << "Authors: Jaedon & Yashaswi\nDate: 11/x/2023\nCourse: CS311 (Data Structures and Algorithms)\nDescription: Program to find the shortest route between cities\n";
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
         unsigned population = std::stoi(parsedCities[i][3]);
         int elevation = std::stoi(parsedCities[i][4]);
 
-         cities.add_city(id, code, name, population, elevation);
+        cities.add_city(id, code, name, population, elevation);
     }
 
     // Add routes from road.txt
@@ -74,17 +74,15 @@ int main(int argc, char **argv)
         cities.add_connection(from_city, to_city, distance);
     }
 
-    cities.print_shortest_path_between("AN", "BK");
+    cities.print_shortest_path_between("AN", "WW");
 
+    // cout << "\nB4_____________________________________" << endl;
+    // cities.print_neighbors("AN");
 
-    cout << "\nB4_____________________________________" << endl; 
-    cities.print_neighbors("AN");
+    // cout << "\nAFTER_____________________________________" << endl;
+    // cities.delete_connection("AN", "BK");
+    // cities.print_neighbors("AN");
 
-     cout << "\nAFTER_____________________________________" << endl; 
-    cities.delete_connection("AN", "BK");
-    cities.print_neighbors("AN");
-
-    
     // Process command line args
     // std::string starting_city = argv[0];
     // std::string target_city = argv[1];

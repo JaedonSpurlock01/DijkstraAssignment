@@ -19,6 +19,7 @@ private:
    string _city_name = "";
    unsigned int _population = -1;
    int _elevation = -1;
+   int _total_neighbors = 0; 
 
    /*
     * [IMPORTANT]
@@ -85,10 +86,23 @@ public:
 
       return false; 
    }
+   
+   bool delete_neighbor(CityNode* city){
+      this->delete_neighbor_at(this->search_neighbor(city)); 
+   }
+
+   pair<CityNode*, unsigned> get_neighbor(CityNode* city){
+      return this->get_neighbor_at(this->search_neighbor(city));
+   }
 
    void add_neighbor(pair<CityNode *, unsigned> new_edge)
    {
       this->neighbors.push_back(new_edge);
+      this->_total_neighbors++; 
+   }
+
+   int get_total_neighbors(){
+      return this->_total_neighbors; 
    }
 };
 
@@ -120,7 +134,18 @@ public:
    // Remove the city from the list of cities
    void delete_city(string id)
    {
-      // Given a list, must delete a node using a  id.
+      // Given a list, must delete a node using a id.
+      CityNode* city = this->NodeList[id];
+      
+      int neighbors = city->get_total_neighbors(); 
+      
+      for(int i = 0; i < neighbors; i++){
+         city->get_neighbor_at(i).first->delete_neighbor(city);
+      }
+      
+      for(int i = 0; i < neighbors; i++){
+         city->delete_neighbor_at(i);
+      }
    }
 
    // Add a route between cities

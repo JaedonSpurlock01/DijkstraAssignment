@@ -45,6 +45,11 @@ public:
    {
       return this->_city_name;
    }
+
+   void add_neighbor(pair<CityNode *, unsigned> new_edge)
+   {
+      this->neighbors.push_back(new_edge);
+   }
 };
 
 /**
@@ -91,7 +96,7 @@ public:
       auto new_edge = make_pair(to_city, distance);
 
       // Add new connection to source node (directed-graph, so we don't need to do same for target node)
-      from_city->fetch_neighbors().push_back(new_edge);
+      from_city->add_neighbor(new_edge);
 
       // cout << "Added a route from " << from_city->fetch_city_name() << " to " << to_city->fetch_city_name() << " with a distance of " << distance << "\n";
    }

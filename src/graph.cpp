@@ -11,6 +11,7 @@ using namespace std;
 
 class CityNode
 {
+
 private:
    string _ID = "";
    string _city_code = "";
@@ -18,33 +19,33 @@ private:
    unsigned int _population = -1;
    int _elevation = -1;
 
-   /*
-    * [IMPORTANT]
-    *  Linked-list of neighbors
-    *  Each node in the list has a tuple with (neighbor, distance_to_neighbor)
-    */
-   list<pair<CityNode *, unsigned>> neighbors;
+      /*
+      * [IMPORTANT]
+      *  Linked-list of neighbors
+      *  Each node in the list has a tuple with (neighbor, distance_to_neighbor)
+      */
+      list<pair<CityNode *, unsigned>> neighbors;
 
-public:
-   CityNode(string id, string code, string name, unsigned int ppl, int elevation)
-   {
-      this->_city_code = code;
-      this->_city_name = name;
-      this->_ID = id;
-      this->_population = ppl;
-      this->_elevation = elevation;
-   }
+   public:
+      CityNode(string id, string code, string name, unsigned int ppl, int elevation)
+      {
+         this->_city_code = code;
+         this->_city_name = name;
+         this->_ID = id;
+         this->_population = ppl;
+         this->_elevation = elevation;
+      }
 
-   list<pair<CityNode *, unsigned>> fetch_neighbors()
-   {
-      return this->neighbors;
-   }
+      list<pair<CityNode*, unsigned>> fetch_neighbors()
+      {
+         return this->neighbors;
+      }
 
-   std::string fetch_city_name()
-   {
-      return this->_city_name;
-   }
-};
+      std::string fetch_city_name()
+      {
+         return this->_city_name;
+      }
+   };
 
 /**
  * [IMPORTANT]

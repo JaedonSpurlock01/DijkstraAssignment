@@ -44,6 +44,10 @@ class CityNode
       {
          return this->_city_name;
       }
+
+      list<pair<CityNode*, unsigned>> get_neighbor_at(){
+
+      }
    };
 
 /**
@@ -96,9 +100,36 @@ public:
    }
 
    // Remove a route between cities (HARD, requires removal from list)
-   void delete_connection()
+   void delete_connection(string source_city_code, string target_city_code)
    {
-      // Given two nodes, erase the connection between them
-      // Access the info using nodes.
+      //IMPLEMENT: Given two nodes erase the connection between them. Iterate thru source's neighbors to find target and reset it to something else
+
+      CityNode* source = this->NodeList[source_city_code];
+      CityNode* target = this->NodeList[target_city_code];
+
+      //for (auto it = source->neighbors.begin(); it != source->neighbors.end(); ++it) {
+       // std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
+      //}
+   }
+
+
+   bool search_by_city_id(string id){
+      //[IMPLEMENT]: Given a string id traverse through NodeList structure to find a match
+      for(const auto& city: this->NodeList){
+         if(city.first == id){
+            return true; 
+         }
+      }
+      return false; 
+   }
+
+   bool search_by_city(CityNode* ctr){
+     //[IMPLEMENT]: Given a *ptr traverse thru nodelist structure to find a match
+     for(const auto& city: this->NodeList){
+       if(city.second == ctr){
+         return true;
+       }
+     }
+     return false; 
    }
 };

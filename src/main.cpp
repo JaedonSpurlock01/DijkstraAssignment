@@ -18,7 +18,6 @@ string verify_commandline_args(int argc, char **argv){
        Verified = "cmd args are less than 3";
        
     }
-
     return Verified; 
 }
 

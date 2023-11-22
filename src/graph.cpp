@@ -104,6 +104,28 @@ public:
    int get_total_neighbors(){
       return this->_total_neighbors; 
    }
+
+   string get_id(){
+      return this->_ID; 
+   }
+
+   string get_city_code(){
+      return this->_city_code; 
+   }
+
+   string get_city_name(){
+      return this->_city_name; 
+   }
+
+   unsigned int get_population(){
+      return this->_population; 
+   }
+
+   int get_elevation(){
+      return this->_elevation; 
+   }
+
+
 };
 
 /**
@@ -142,7 +164,7 @@ public:
       for(int i = 0; i < neighbors; i++){
          city->get_neighbor_at(i).first->delete_neighbor(city);
       }
-      
+
       for(int i = 0; i < neighbors; i++){
          city->delete_neighbor_at(i);
       }

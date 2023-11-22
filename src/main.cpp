@@ -74,8 +74,7 @@ int main(int argc, char **argv)
         cities.add_connection(from_city, to_city, distance);
     }
 
-
-    cities.print_shortest_path_between("A", "B");
+    cities.print_neighbors("AN");
 
     // Process command line args
     // std::string starting_city = argv[0];

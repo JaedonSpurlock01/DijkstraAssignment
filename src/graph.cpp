@@ -105,6 +105,12 @@ public:
 
    void print_neighbors(string target_city_code)
    {
+      if (NodeList.find(target_city_code) == NodeList.end())
+      {
+         std::cout << "City with code " << target_city_code << " is invalid." << std::endl;
+         return;
+      }
+
       CityNode *city = this->NodeList[target_city_code];
 
       for (const auto &neighbor : city->fetch_neighbors())

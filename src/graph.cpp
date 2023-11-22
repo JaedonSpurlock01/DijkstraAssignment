@@ -70,21 +70,23 @@ public:
           }
        }
 
-       return -1; 
+      return -1;
    }
 
+   bool delete_neighbor_at(int index)
+   {
 
-   bool delete_neighbor_at(int index){
-      
       int i = 0;
-      for (auto it = this->neighbors.begin(); it != this->neighbors.end(); ++it, ++i) {
-         if (i == index) {
-               this->neighbors.erase(it); // Erase the element at the iterator position
-               return true;
+      for (auto it = this->neighbors.begin(); it != this->neighbors.end(); ++it, ++i)
+      {
+         if (i == index)
+         {
+            this->neighbors.erase(it); // Erase the element at the iterator position
+            return true;
          }
       }
 
-      return false; 
+      return false;
    }
    
    bool delete_neighbor(CityNode* city){
@@ -188,46 +190,46 @@ public:
       // cout << "Added a route from " << from_city->fetch_city_name() << " to " << to_city->fetch_city_name() << " with a distance of " << distance << "\n";
    }
 
-
    // Remove a route between cities (HARD, requires removal from list)
    bool delete_connection(string source_city_code, string target_city_code)
    {
-      //IMPLEMENT: Given two nodes erase the connection between them. Iterate thru source's neighbors to find target and reset it to something else
+      // IMPLEMENT: Given two nodes erase the connection between them. Iterate thru source's neighbors to find target and reset it to something else
 
-      CityNode* source = this->NodeList[source_city_code];
-      CityNode* target = this->NodeList[target_city_code];
-      
+      CityNode *source = this->NodeList[source_city_code];
+      CityNode *target = this->NodeList[target_city_code];
+
       int index = source->search_neighbor(target);
       if(index > -1){
           source->delete_neighbor_at(index);
-          return true; 
       }
-      
-      else{
-          return false; 
-      }
-      
+  
+         
    }
 
-
-   bool search_by_city_id(string id){
+   bool search_by_city_id(string id)
+   {
       //[IMPLEMENT]: Given a string id traverse through NodeList structure to find a match
-      for(const auto& city: this->NodeList){
-         if(city.first == id){
-            return true; 
+      for (const auto &city : this->NodeList)
+      {
+         if (city.first == id)
+         {
+            return true;
          }
       }
-      return false; 
+      return false;
    }
 
-   bool search_by_city(CityNode* ctr){
-     //[IMPLEMENT]: Given a *ptr traverse thru nodelist structure to find a match
-     for(const auto& city: this->NodeList){
-       if(city.second == ctr){
-         return true;
-       }
-     }
-     return false; 
+   bool search_by_city(CityNode *ctr)
+   {
+      //[IMPLEMENT]: Given a *ptr traverse thru nodelist structure to find a match
+      for (const auto &city : this->NodeList)
+      {
+         if (city.second == ctr)
+         {
+            return true;
+         }
+      }
+      return false;
    }
 
    void print_neighbors(string target_city_code)
@@ -269,10 +271,15 @@ public:
       else
       {
          std::cout << "The shortest distance from " << source_city->fetch_city_name() << " to " << target_city->fetch_city_name() << " is " << to_string(shortest_distance) << "\n";
+         std::string route;
          for (std::string city : shortest_path)
          {
-            std::cout << city << "->";
+            route.append(city);
+            route.append("->");
          }
+         route.erase(route.length() - 2);
+
+         std::cout << route << "\n";
       }
    }
 

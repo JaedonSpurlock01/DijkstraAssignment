@@ -10,16 +10,9 @@ std::vector<std::vector<std::string>> parse_cities_file(std::istream &file)
     std::vector<std::vector<std::string>> cities;
     std::string id, code, name, population, elevation;
 
-    while (!file.eof())
+    while (file >> id >> code >> name >> population >> elevation)
     {
         std::vector<std::string> city;
-
-        std::getline(file, id, '\t');
-        std::getline(file, code, '\t');
-        std::getline(file, name, '\t');
-        std::getline(file, population, '\t');
-        std::getline(file, elevation, '\n');
-
         city.push_back(id);
         city.push_back(code);
         city.push_back(name);
@@ -38,13 +31,9 @@ std::vector<std::vector<unsigned>> parse_routes_file(std::istream &file)
     std::vector<std::vector<unsigned>> routes;
     unsigned from_city = 0, to_city = 0, distance = 0;
 
-    while (file >> from_city)
+    while (file >> from_city >> to_city >> distance)
     {
         std::vector<unsigned> route;
-
-        file >> to_city;
-        file >> distance;
-
         route.push_back(from_city);
         route.push_back(to_city);
         route.push_back(distance);

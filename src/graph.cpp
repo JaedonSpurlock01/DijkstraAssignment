@@ -59,7 +59,7 @@ public:
             return *it;
       }
    }
-   
+
    int search_neighbor(CityNode *city)
    {
 
@@ -181,7 +181,7 @@ public:
          city->delete_neighbor_at(i);
       }
 
-      delete city; 
+      delete city;
    }
 
    // Add a route between cities

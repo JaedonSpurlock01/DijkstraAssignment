@@ -227,10 +227,15 @@ public:
       else
       {
          std::cout << "The shortest distance from " << source_city->fetch_city_name() << " to " << target_city->fetch_city_name() << " is " << to_string(shortest_distance) << "\n";
+         std::string route;
          for (std::string city : shortest_path)
          {
-            std::cout << city << "->";
+            route.append(city);
+            route.append("->");
          }
+         route.erase(route.length() - 2);
+
+         std::cout << route << "\n";
       }
    }
 

@@ -85,7 +85,7 @@ public:
 
       return false; 
    }
-   
+
    void add_neighbor(pair<CityNode *, unsigned> new_edge)
    {
       this->neighbors.push_back(new_edge);
@@ -154,7 +154,8 @@ public:
       if(index > -1){
           source->delete_neighbor_at(index);
       }
-      
+
+         
    }
 
 

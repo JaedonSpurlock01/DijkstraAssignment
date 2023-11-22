@@ -57,11 +57,7 @@ public:
 class CityGraph
 {
 private:
-   // vector version of graph (stable)
-   // vector<CityNode *> NodeList;
-
-   // untested map version of graph (unstable)
-   // A city code maps to a city node
+   // A city code (e.g. AB, AN, CN) maps to a city node
    unordered_map<string, CityNode *> NodeList;
    unordered_map<string, string> id_to_code;
 

@@ -10,16 +10,9 @@ std::vector<std::vector<std::string>> parse_cities_file(std::istream &file)
     std::vector<std::vector<std::string>> cities;
     std::string id, code, name, population, elevation;
 
-    while (!file.eof())
+    while (file >> id >> code >> name >> population >> elevation)
     {
         std::vector<std::string> city;
-
-        std::getline(file, id, '\t');
-        std::getline(file, code, '\t');
-        std::getline(file, name, '\t');
-        std::getline(file, population, '\t');
-        std::getline(file, elevation, '\n');
-
         city.push_back(id);
         city.push_back(code);
         city.push_back(name);

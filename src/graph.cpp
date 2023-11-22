@@ -59,9 +59,7 @@ public:
             return *it;
       }
    }
-    void set_total_neighte(){
-      
-    }
+   
    int search_neighbor(CityNode *city)
    {
 

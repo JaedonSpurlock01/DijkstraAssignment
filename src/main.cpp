@@ -77,20 +77,20 @@ int main(int argc, char **argv)
     //Checking if the arguments exist or not in the hashmap
     bool verify = true; 
     if(cities.search_by_city_id(argv[1]) == false){
-        cout << "Invalid Arguments Passed:= "  << argv[1] << endl;
+        cout << "Invalid city code: "  << argv[1] << endl;
         verify = false; 
     }
     
     
     if(cities.search_by_city_id(argv[2]) == false){
-        cout << "Invalid Arguments Passed:= " << argv[2] << endl;
+        cout << "Invalid city code: " << argv[2] << endl;
         verify = false; 
     }
 
     if(verify == false) return 0; 
 
 
-    cities.print_shortest_path_between("AN", "WW");
+    cities.print_shortest_path_between(argv[1], argv[2]);
 
     // cout << "\nB4_____________________________________" << endl;
     // cities.print_neighbors("AN");

@@ -4,35 +4,36 @@
 #include "parsing.cpp"
 #include <vector>
 
+string verify_commandline_args(int argc, char **argv)
+{
+    // Purpose: Use these two args and check if their valid
+    // Validity criterion:
+    string Verified = "true";
 
-string verify_commandline_args(int argc, char **argv){
-    //Purpose: Use these two args and check if their valid
-    //Validity criterion:
-    string Verified = "true"; 
-    
-    if(argc > 3){
-       Verified = "cmd args exceed limit of 3";
+    if (argc > 3)
+    {
+        Verified = "cmd args exceed limit of 3";
     }
-    
-    else if(argc < 3){
-       Verified = "cmd args are less than 3";
-       
+
+    else if (argc < 3)
+    {
+        Verified = "cmd args are less than 3";
     }
+
     return Verified; 
 }
 
 int main(int argc, char **argv)
-{   //Check and verify args validity
-   
+{ // Check and verify args validity
+
     // string verified = verify_commandline_args(argc, argv);
 
     // if(verified != "true"){
     //     //Return and quite the program on incorrect arguments
-    //     cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl; 
-    //     cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl; 
-    //     return 1; 
+    //     cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl;
+    //     cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl;
+    //     return 1;
     // }
-    
 
     // Program summary
     std::cout << "Authors: Jaedon & Yashaswi\nDate: 11/x/2023\nCourse: CS311 (Data Structures and Algorithms)\nDescription: Program to find the shortest route between cities\n";
@@ -73,9 +74,7 @@ int main(int argc, char **argv)
         cities.add_connection(from_city, to_city, distance);
     }
 
-    cities.print_neighbors("AN");
-
-    // cities.print_shortest_path_between("0", "1");
+    cities.print_shortest_path_between("WW", "VV");
 
     // Process command line args
     // std::string starting_city = argv[0];

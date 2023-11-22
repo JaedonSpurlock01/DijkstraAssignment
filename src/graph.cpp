@@ -59,7 +59,9 @@ public:
             return *it;
       }
    }
-
+    void set_total_neighte(){
+      
+    }
    int search_neighbor(CityNode *city)
    {
 
@@ -180,6 +182,8 @@ public:
       {
          city->delete_neighbor_at(i);
       }
+
+      delete city; 
    }
 
    // Add a route between cities

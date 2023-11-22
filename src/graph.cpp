@@ -206,7 +206,9 @@ public:
       std::cout << "To City: " << target_city->fetch_city_name() << "\n\n";
 
       // Find the shortest path between source and target
-      vector<std::string> shortest_path = find_shortest_path_between(source_city, target_city);
+      std::pair<vector<std::string>, unsigned> shortest_path_collection = find_shortest_path_between(source_city, target_city);
+      std::vector<std::string> shortest_path = shortest_path_collection.first;
+      unsigned shortest_distance = shortest_path_collection.second;
 
       // Print out the shortest route from the source city to the target city
       if (!shortest_path.size())
@@ -215,6 +217,7 @@ public:
       }
       else
       {
+         std::cout << "The shortest distance from " << source_city->fetch_city_name() << " to " << target_city->fetch_city_name() << " is " << to_string(shortest_distance) << "\n";
          for (std::string city : shortest_path)
          {
             std::cout << city << "->";
@@ -222,7 +225,7 @@ public:
       }
    }
 
-   vector<std::string> find_shortest_path_between(CityNode *source_city, CityNode *target_city)
+   std::pair<std::vector<std::string>, unsigned> find_shortest_path_between(CityNode *source_city, CityNode *target_city)
    {
       priority_queue<pair<CityNode *, unsigned>> cities_to_visit;
       unordered_set<CityNode *> cities_visited;
@@ -252,7 +255,10 @@ public:
          // If the target city is found
          if (current_city == target_city)
          {
-            return construct_shortest_path(previous_city, source_city, target_city);
+
+            vector<std::string> shortest_path = construct_shortest_path(previous_city, source_city, target_city);
+            unsigned shortest_path_distance = distance_from_source[target_city];
+            return make_pair(shortest_path, shortest_path_distance);
          }
 
          // Process each current city's neighbor

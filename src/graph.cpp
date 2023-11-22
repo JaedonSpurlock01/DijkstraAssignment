@@ -39,6 +39,11 @@ public:
    {
       return this->neighbors;
    }
+
+   std::string fetch_city_name()
+   {
+      return this->_city_name;
+   }
 };
 
 /**
@@ -83,9 +88,11 @@ public:
 
       // Create a tuple with the qualities (target, weight)
       auto new_edge = make_pair(to_city, distance);
+
+      // Add new connection to source node (directed-graph, so we don't need to do same for target node)
       from_city->fetch_neighbors().push_back(new_edge);
 
-      cout << "Added a route from " << from_city_code << " to " << to_city_code << " with a distance of " << distance << "\n";
+      cout << "Added a route from " << from_city->fetch_city_name() << " to " << to_city->fetch_city_name() << " with a distance of " << distance << "\n";
    }
 
    // Remove a route between cities (HARD, requires removal from list)

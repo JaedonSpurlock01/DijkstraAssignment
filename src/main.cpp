@@ -24,14 +24,14 @@ string verify_commandline_args(int argc, char **argv){
 int main(int argc, char **argv)
 {   //Check and verify args validity
    
-    string verified = verify_commandline_args(argc, argv);
+    // string verified = verify_commandline_args(argc, argv);
 
-    if(verified != "true"){
-        //Return and quite the program on incorrect arguments
-        cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl; 
-        cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl; 
-        return 1; 
-    }
+    // if(verified != "true"){
+    //     //Return and quite the program on incorrect arguments
+    //     cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl; 
+    //     cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl; 
+    //     return 1; 
+    // }
     
 
     // Program summary
@@ -72,6 +72,10 @@ int main(int argc, char **argv)
 
         cities.add_connection(from_city, to_city, distance);
     }
+
+    cities.print_neighbors("AN");
+
+    // cities.print_shortest_path_between("0", "1");
 
     // Process command line args
     // std::string starting_city = argv[0];

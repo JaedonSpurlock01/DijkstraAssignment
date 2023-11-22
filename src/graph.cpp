@@ -93,7 +93,7 @@ public:
       return false;
    }
 
-   bool delete_neighbor(CityNode *city)
+   void delete_neighbor(CityNode *city)
    {
       this->delete_neighbor_at(this->search_neighbor(city));
    }
@@ -199,7 +199,7 @@ public:
    }
 
    // Remove a route between cities (HARD, requires removal from list)
-   bool delete_connection(string source_city_code, string target_city_code)
+   void delete_connection(string source_city_code, string target_city_code)
    {
       // IMPLEMENT: Given two nodes erase the connection between them. Iterate thru source's neighbors to find target and reset it to something else
 
@@ -292,7 +292,7 @@ public:
 
    std::pair<std::vector<std::string>, unsigned> find_shortest_path_between(CityNode *source_city, CityNode *target_city)
    {
-      priority_queue<pair<CityNode *, unsigned>> cities_to_visit;
+      priority_queue<pair<unsigned, CityNode *>, vector<pair<unsigned, CityNode *>>, greater<pair<unsigned, CityNode *>>> cities_to_visit;
       unordered_set<CityNode *> cities_visited;
       unordered_map<CityNode *, unsigned> distance_from_source;
       unordered_map<CityNode *, CityNode *> previous_city;
@@ -306,12 +306,12 @@ public:
 
       // Add the source to the queue to start Dijkstra's Algorithm
       distance_from_source[source_city] = 0;
-      cities_to_visit.push(make_pair(source_city, 0));
+      cities_to_visit.push(make_pair(0, source_city));
 
       while (cities_to_visit.size())
       {
          // Remove the current city from the queue
-         CityNode *current_city = cities_to_visit.top().first;
+         CityNode *current_city = cities_to_visit.top().second;
          cities_to_visit.pop();
 
          // Add city to the visited set
@@ -340,7 +340,7 @@ public:
                {
                   distance_from_source[neighbor] = distance_to_neighbor_from_source;
                   previous_city[neighbor] = current_city;
-                  cities_to_visit.push(make_pair(neighbor, distance_to_neighbor_from_source));
+                  cities_to_visit.push(make_pair(distance_to_neighbor_from_source, neighbor));
                }
             }
          }

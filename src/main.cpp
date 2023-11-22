@@ -26,14 +26,14 @@ string verify_commandline_args(int argc, char **argv)
 int main(int argc, char **argv)
 { // Check and verify args validity
 
-    // string verified = verify_commandline_args(argc, argv);
+     string verified = verify_commandline_args(argc, argv);
 
-    // if(verified != "true"){
-    //     //Return and quite the program on incorrect arguments
-    //     cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl;
-    //     cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl;
-    //     return 1;
-    // }
+     if(verified != "true"){
+         //Return and quite the program on incorrect arguments
+         cout << "\x1b[31mIncorrect Command Line Arguments\x1b[0m" << endl;
+         cout << "\x1b[33m[Error Details]: " << verified << "\x1b[0m"  <<endl;
+         return 1;
+     }
 
     // Program summary
     std::cout << "Authors: Jaedon & Yashaswi\nDate: 11/x/2023\nCourse: CS311 (Data Structures and Algorithms)\nDescription: Program to find the shortest route between cities\n";
@@ -75,6 +75,14 @@ int main(int argc, char **argv)
     }
 
     cities.print_shortest_path_between("AN", "BK");
+
+
+    cout << "\nB4_____________________________________" << endl; 
+    cities.print_neighbors("AN");
+
+     cout << "\nAFTER_____________________________________" << endl; 
+    cities.delete_connection("AN", "BK");
+    cities.print_neighbors("AN");
 
     // Process command line args
     // std::string starting_city = argv[0];

@@ -52,7 +52,7 @@ public:
        
        int i = 0; 
        for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, i++) {
-          std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
+          //std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
           if(i == index) return *it; 
        }
  
@@ -62,7 +62,7 @@ public:
        
       int index = 0; 
       for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, index++) {
-          std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
+          //std::cout << "Neighbor: " << it->first << ", Distance: " << it->second << std::endl;
           
           if(it->first == city){
             return index; 
@@ -143,7 +143,7 @@ public:
 
 
    // Remove a route between cities (HARD, requires removal from list)
-   void delete_connection(string source_city_code, string target_city_code)
+   bool delete_connection(string source_city_code, string target_city_code)
    {
       //IMPLEMENT: Given two nodes erase the connection between them. Iterate thru source's neighbors to find target and reset it to something else
 
@@ -153,9 +153,13 @@ public:
       int index = source->search_neighbor(target);
       if(index > -1){
           source->delete_neighbor_at(index);
+          return true; 
       }
-  
-         
+      
+      else{
+          return false; 
+      }
+      
    }
 
 
@@ -191,7 +195,7 @@ public:
 
       for (const auto &neighbor : city->fetch_neighbors())
       {
-         std::cout << neighbor.first->fetch_city_name() << " ";
+         std::cout << neighbor.first->fetch_city_name() << " " << endl;
       }
       std::cout << "\n";
    }

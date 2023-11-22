@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <queue>
 #include <unordered_set>
+#include <algorithm>
 
 using namespace std;
 
@@ -138,9 +139,16 @@ public:
       vector<std::string> shortest_path = find_shortest_path_between(source_city, target_city);
 
       // Print out the shortest route from the source city to the target city
-      for (std::string city : shortest_path)
+      if (!shortest_path.size())
       {
-         std::cout << city << "->";
+         std::cout << "No route from " << source_city->fetch_city_name() << " to " << target_city->fetch_city_name() << "\n";
+      }
+      else
+      {
+         for (std::string city : shortest_path)
+         {
+            std::cout << city << "->";
+         }
       }
    }
 
@@ -168,8 +176,6 @@ public:
          CityNode *current_city = cities_to_visit.top().first;
          cities_to_visit.pop();
 
-         cout << "Current city: " << current_city->fetch_city_name() << std::endl;
-
          // Add city to the visited set
          cities_visited.insert(current_city);
 
@@ -185,13 +191,9 @@ public:
             CityNode *neighbor = neighbor_pair.first;
             unsigned distance_to_neighbor = neighbor_pair.second;
 
-            cout << "Neighbor: " << neighbor->fetch_city_name() << std::endl;
-
             if (!cities_visited.count(neighbor))
             {
                unsigned distance_to_neighbor_from_source = distance_from_source[current_city] + distance_to_neighbor;
-
-               cout << "Distance of neighbor from source " << to_string(distance_to_neighbor_from_source) << endl;
 
                // Relaxation of nodes
                if (distance_to_neighbor < distance_from_source[neighbor])
@@ -223,6 +225,7 @@ public:
       }
 
       // The shortest path is backwards, so reverse it before returning it
+      std::reverse(shortest_path.begin(), shortest_path.end());
       return shortest_path;
    }
 };

@@ -9,9 +9,12 @@
 #include <algorithm>
 #include "graph.h"
 
+/**
+ * @brief Get a reference of the neighbor referenced at the index in the list,
+ *        returns a tuple (CityNode, Distance to CityNode)
+ */
 std::pair<CityNode *, unsigned> CityNode::get_neighbor_at(int index)
 {
-
    int i = 0;
    for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, i++)
    {
@@ -21,6 +24,10 @@ std::pair<CityNode *, unsigned> CityNode::get_neighbor_at(int index)
    }
 }
 
+/**
+ * @brief Iterate through the neighbors list and return the index it exists at,
+ *        if it doesn't exist return -1
+ */
 int CityNode::search_neighbor(CityNode *city)
 {
 
@@ -38,6 +45,9 @@ int CityNode::search_neighbor(CityNode *city)
    return -1;
 }
 
+/**
+ * @brief Delete the neighbor in the list referenced at the index
+ */
 bool CityNode::delete_neighbor_at(int index)
 {
 
@@ -54,7 +64,9 @@ bool CityNode::delete_neighbor_at(int index)
    return false;
 }
 
-// Add a city to the list of cities
+/**
+ * @brief Add a city to the list of cities
+ */
 void CityGraph::add_city(std::string id, std::string code, std::string name, unsigned int ppl, int elevation)
 {
    CityNode *city = new CityNode(id, code, name, ppl, elevation);
@@ -62,6 +74,9 @@ void CityGraph::add_city(std::string id, std::string code, std::string name, uns
    id_to_code[id] = code;
 }
 
+/**
+ * @brief Add multiple cities to the list of cities using a parsed string file
+ */
 void CityGraph::add_multiple_cities(std::vector<std::vector<std::string>> list_of_cities)
 {
    for (const auto &city : list_of_cities)
@@ -76,7 +91,9 @@ void CityGraph::add_multiple_cities(std::vector<std::vector<std::string>> list_o
    }
 }
 
-// Remove the city from the list of cities
+/**
+ * @brief Delete the city referenced by its id (letter code)
+ */
 void CityGraph::delete_city(std::string id)
 {
    // Given a list, must delete a node using a id.
@@ -97,7 +114,9 @@ void CityGraph::delete_city(std::string id)
    delete city;
 }
 
-// Add a route between cities
+/**
+ * @brief Add a weighted edge between two cities
+ */
 void CityGraph::add_connection(unsigned from_city_id, unsigned to_city_id, unsigned distance)
 {
    std::string from_city_code = this->id_to_code[std::to_string(from_city_id)];
@@ -113,6 +132,9 @@ void CityGraph::add_connection(unsigned from_city_id, unsigned to_city_id, unsig
    from_city->add_neighbor(new_edge);
 }
 
+/**
+ * @brief Add multiple weighted edges given by a parsed file
+ */
 void CityGraph::add_multiple_connections(std::vector<std::vector<unsigned>> list_of_routes)
 {
    for (const auto &route : list_of_routes)
@@ -125,7 +147,9 @@ void CityGraph::add_multiple_connections(std::vector<std::vector<unsigned>> list
    }
 }
 
-// Remove a route between cities (HARD, requires removal from list)
+/**
+ * @brief Delete a weighted edge from source to target (directed graph)
+ */
 void CityGraph::delete_connection(std::string source_city_code, std::string target_city_code)
 {
    // IMPLEMENT: Given two nodes erase the connection between them. Iterate thru source's neighbors to find target and reset it to something else
@@ -140,9 +164,11 @@ void CityGraph::delete_connection(std::string source_city_code, std::string targ
    }
 }
 
+/**
+ * @brief Search a city by its id (letter code) and return true if it exists, false otherwise
+ */
 bool CityGraph::search_by_city_id(std::string id)
 {
-   //[IMPLEMENT]: Given a string id traverse through listCities structure to find a match
    for (const auto &city : this->listCities)
    {
       if (city.first == id)
@@ -153,9 +179,11 @@ bool CityGraph::search_by_city_id(std::string id)
    return false;
 }
 
+/**
+ * @brief Search a city by its object (letter code) and return true if it exists, false otherwise
+ */
 bool CityGraph::search_by_city(CityNode *ctr)
 {
-   //[IMPLEMENT]: Given a *ptr traverse thru listCities structure to find a match
    for (const auto &city : this->listCities)
    {
       if (city.second == ctr)
@@ -166,6 +194,9 @@ bool CityGraph::search_by_city(CityNode *ctr)
    return false;
 }
 
+/**
+ * @brief Print the neighbors of a given city's id (letter code)
+ */
 void CityGraph::print_neighbors(std::string target_city_code)
 {
    if (listCities.find(target_city_code) == listCities.end())
@@ -183,6 +214,9 @@ void CityGraph::print_neighbors(std::string target_city_code)
    std::cout << "\n";
 }
 
+/**
+ * @brief Print the shortest weighted route between two cities
+ */
 void CityGraph::print_shortest_path_between(std::string source_city_code, std::string target_city_code)
 {
    // Grab the references to each city
@@ -217,6 +251,9 @@ void CityGraph::print_shortest_path_between(std::string source_city_code, std::s
    }
 }
 
+/**
+ * @brief Find the shortest weighted route between two cities, returns a tuple (path between cities, tentative distance)
+ */
 std::pair<std::vector<std::string>, unsigned> CityGraph::find_shortest_path_between(CityNode *source_city, CityNode *target_city)
 {
    std::priority_queue<std::pair<unsigned, CityNode *>, std::vector<std::pair<unsigned, CityNode *>>, std::greater<std::pair<unsigned, CityNode *>>> cities_to_visit;
@@ -277,6 +314,9 @@ std::pair<std::vector<std::string>, unsigned> CityGraph::find_shortest_path_betw
    return {};
 }
 
+/**
+ * @brief Create a vector of strings containing the path from the source city to the target city
+ */
 std::vector<std::string> CityGraph::construct_shortest_path(std::unordered_map<CityNode *, CityNode *> previous_city, CityNode *source_city, CityNode *target_city)
 {
    std::vector<std::string> shortest_path;

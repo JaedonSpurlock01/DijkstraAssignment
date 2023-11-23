@@ -28,51 +28,21 @@ public:
         this->_population = ppl;
         this->_elevation = elevation;
     }
-    std::list<std::pair<CityNode *, unsigned>> fetch_neighbors()
-    {
-        return this->neighbors;
-    }
-    std::string fetch_city_name()
-    {
-        return this->_city_name;
-    }
-    void delete_neighbor(CityNode *city)
-    {
-        this->delete_neighbor_at(this->search_neighbor(city));
-    }
-    std::pair<CityNode *, unsigned> get_neighbor(CityNode *city)
-    {
-        return this->get_neighbor_at(this->search_neighbor(city));
-    }
     void add_neighbor(std::pair<CityNode *, unsigned> new_edge)
     {
         this->neighbors.push_back(new_edge);
         this->_total_neighbors++;
     }
-    int get_total_neighbors()
-    {
-        return this->_total_neighbors;
-    }
-    std::string get_id()
-    {
-        return this->_ID;
-    }
-    std::string get_city_code()
-    {
-        return this->_city_code;
-    }
-    std::string get_city_name()
-    {
-        return this->_city_name;
-    }
-    unsigned int get_population()
-    {
-        return this->_population;
-    }
-    int get_elevation()
-    {
-        return this->_elevation;
-    }
+    std::list<std::pair<CityNode *, unsigned>> fetch_neighbors() { return this->neighbors; }
+    std::string fetch_city_name() { return this->_city_name; }
+    void delete_neighbor(CityNode *city) { this->delete_neighbor_at(this->search_neighbor(city)); }
+    std::pair<CityNode *, unsigned> get_neighbor(CityNode *city) { return this->get_neighbor_at(this->search_neighbor(city)); }
+    int get_total_neighbors() { return this->_total_neighbors; }
+    std::string get_id() { return this->_ID; }
+    std::string get_city_code() { return this->_city_code; }
+    std::string get_city_name() const { return this->_city_name; }
+    unsigned int get_population() const { return this->_population; }
+    int get_elevation() const { return this->_elevation; }
     std::pair<CityNode *, unsigned> get_neighbor_at(int index);
     int search_neighbor(CityNode *city);
     bool delete_neighbor_at(int index);

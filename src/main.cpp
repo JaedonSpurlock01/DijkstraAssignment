@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "graph.cpp"
+#include "graph.h"
 #include "parsing.cpp"
 #include "error.cpp"
 #include <vector>
@@ -14,8 +14,8 @@ int main(int argc, char **argv)
     verify_commandline_args(argc, argv, 3);
 
     // Load city data
-    ifstream citiesFile(CITY_FILE);
-    ifstream routesFile(ROUTE_FILE);
+    std::ifstream citiesFile(CITY_FILE);
+    std::ifstream routesFile(ROUTE_FILE);
 
     // Check if files are correct, if not terminate program
     verify_files({&citiesFile, &routesFile});

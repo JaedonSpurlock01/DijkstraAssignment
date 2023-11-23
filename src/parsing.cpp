@@ -3,8 +3,10 @@
 #include <fstream>
 #include <string>
 
-// Parses cities file and returns a vector of vectors where
-// each vector has string id, string code, string name, string population, string elevation
+/**
+ * @brief Parses a text file containing city data, returns an array of arrays,
+ *        where each single array contains id, letter code, name, population, and elevation
+ */
 std::vector<std::vector<std::string>> parse_cities_file(std::istream &file)
 {
     std::vector<std::vector<std::string>> cities;
@@ -21,11 +23,13 @@ std::vector<std::vector<std::string>> parse_cities_file(std::istream &file)
         cities.push_back(city);
     }
 
-     return cities;
+    return cities;
 }
 
-// Parses routes/roads file and returns a vector of vectors where
-// each vector has from_city (source), to_city (target), distance (weight)
+/**
+ * @brief Parses a text file containing route data, returns an array of arrays,
+ *        where each single array contains from_city (source), to_city (target), distance (weight)
+ */
 std::vector<std::vector<unsigned>> parse_routes_file(std::istream &file)
 {
     std::vector<std::vector<unsigned>> routes;

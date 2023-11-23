@@ -163,6 +163,20 @@ public:
       id_to_code[id] = code;
    }
 
+   void add_multiple_cities(std::vector<std::vector<std::string>> list_of_cities)
+   {
+      for (const auto &city : list_of_cities)
+      {
+         std::string id = city.at(0);
+         std::string code = city.at(1);
+         std::string name = city.at(2);
+         unsigned population = std::stoi(city.at(3));
+         int elevation = std::stoi(city.at(4));
+
+         this->add_city(id, code, name, population, elevation);
+      }
+   }
+
    // Remove the city from the list of cities
    void delete_city(string id)
    {
@@ -198,6 +212,18 @@ public:
 
       // Add new connection to source node (directed-graph, so we don't need to do same for target node)
       from_city->add_neighbor(new_edge);
+   }
+
+   void add_multiple_connections(std::vector<std::vector<unsigned>> list_of_routes)
+   {
+      for (const auto &route : list_of_routes)
+      {
+         unsigned from_city = route.at(0);
+         unsigned to_city = route.at(1);
+         unsigned distance = route.at(2);
+
+         this->add_connection(from_city, to_city, distance);
+      }
    }
 
    // Remove a route between cities (HARD, requires removal from list)

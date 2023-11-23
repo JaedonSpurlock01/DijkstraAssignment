@@ -53,27 +53,11 @@ int main(int argc, char **argv)
     // Add cities from city.txt
     CityGraph cities = CityGraph();
     std::vector<std::vector<std::string>> parsedCities = parse_cities_file(citiesFile);
-    for (int i = 0; i < parsedCities.size(); i++)
-    {
-        std::string id = parsedCities[i][0];
-        std::string code = parsedCities[i][1];
-        std::string name = parsedCities[i][2];
-        unsigned population = std::stoi(parsedCities[i][3]);
-        int elevation = std::stoi(parsedCities[i][4]);
-
-        cities.add_city(id, code, name, population, elevation);
-    }
+    cities.add_multiple_cities(parsedCities);
 
     // Add routes from road.txt
     std::vector<std::vector<unsigned>> parsedRoutes = parse_routes_file(routesFile);
-    for (int i = 0; i < parsedRoutes.size(); i++)
-    {
-        unsigned from_city = parsedRoutes[i][0];
-        unsigned to_city = parsedRoutes[i][1];
-        unsigned distance = parsedRoutes[i][2];
-
-        cities.add_connection(from_city, to_city, distance);
-    }
+    cities.add_multiple_connections(parsedRoutes);
 
     // Checking if the arguments exist or not in the hashmap
     bool verify = true;
@@ -93,17 +77,6 @@ int main(int argc, char **argv)
         return 0;
 
     cities.print_shortest_path_between(argv[1], argv[2]);
-
-    // cout << "\nB4_____________________________________" << endl;
-    // cities.print_neighbors("AN");
-
-    // cout << "\nAFTER_____________________________________" << endl;
-    // cities.delete_connection("AN", "BK");
-    // cities.print_neighbors("AN");
-
-    // Process command line args
-    // std::string starting_city = argv[0];
-    // std::string target_city = argv[1];
 
     // Program termination
     citiesFile.close();

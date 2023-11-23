@@ -55,6 +55,8 @@ private:
     std::unordered_map<std::string, std::string> id_to_code;
 
 public:
+    std::string format_path_into_string(std::vector<std::string> path, std::string source_city_name, std::string target_city_name, unsigned distance);
+    std::string get_city_data(std::string id);
     void add_city(std::string id, std::string code, std::string name, unsigned int ppl, int elevation);
     void add_multiple_cities(std::vector<std::vector<std::string>> list_of_cities);
     void delete_city(std::string id);

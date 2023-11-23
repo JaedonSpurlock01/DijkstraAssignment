@@ -8,6 +8,7 @@
 #include <unordered_set>
 #include <algorithm>
 #include "graph.h"
+#include <sstream>
 
 /**
  * @brief Get a reference of the neighbor referenced at the index in the list,
@@ -215,6 +216,43 @@ void CityGraph::print_neighbors(std::string target_city_code)
 }
 
 /**
+ * @brief Gather a city's information and return it as a string
+ */
+std::string CityGraph::get_city_data(std::string id)
+{
+   CityNode *city = this->listCities[id];
+   std::ostringstream data;
+   data << city->get_city_name() << ", population " << city->get_population() << ", elevation " << city->get_elevation();
+   return data.str();
+}
+
+/**
+ * @brief Format a path given as a vector into a string and return that string
+ */
+std::string CityGraph::format_path_into_string(std::vector<std::string> path, std::string source_city_name, std::string target_city_name, unsigned distance)
+{
+   std::ostringstream formatted_path;
+
+   if (!path.size())
+   {
+      formatted_path << "No route from " << source_city_name << " to " << target_city_name << "\n";
+   }
+   else
+   {
+      formatted_path << "The shortest distance from " << source_city_name << " to " << target_city_name << " is " << std::to_string(distance) << "\n";
+      std::string route;
+      for (std::string city : path)
+      {
+         route.append(city);
+         route.append("->");
+      }
+      route.erase(route.length() - 2);
+      formatted_path << "through the route: " << route << "\n";
+   }
+   return formatted_path.str();
+}
+
+/**
  * @brief Print the shortest weighted route between two cities
  */
 void CityGraph::print_shortest_path_between(std::string source_city_code, std::string target_city_code)
@@ -223,8 +261,8 @@ void CityGraph::print_shortest_path_between(std::string source_city_code, std::s
    CityNode *source_city = this->listCities[source_city_code];
    CityNode *target_city = this->listCities[target_city_code];
 
-   std::cout << "From City: " << source_city->get_city_name() << "\n";
-   std::cout << "To City: " << target_city->get_city_name() << "\n\n";
+   std::cout << "From City: " << this->get_city_data(source_city_code) << "\n";
+   std::cout << "To City: " << this->get_city_data(target_city_code) << "\n\n";
 
    // Find the shortest path between source and target
    std::pair<std::vector<std::string>, unsigned> shortest_path_collection = find_shortest_path_between(source_city, target_city);
@@ -232,23 +270,7 @@ void CityGraph::print_shortest_path_between(std::string source_city_code, std::s
    unsigned shortest_distance = shortest_path_collection.second;
 
    // Print out the shortest route from the source city to the target city
-   if (!shortest_path.size())
-   {
-      std::cout << "No route from " << source_city->get_city_name() << " to " << target_city->get_city_name() << "\n";
-   }
-   else
-   {
-      std::cout << "The shortest distance from " << source_city->get_city_name() << " to " << target_city->get_city_name() << " is " << std::to_string(shortest_distance) << "\n";
-      std::string route;
-      for (std::string city : shortest_path)
-      {
-         route.append(city);
-         route.append("->");
-      }
-      route.erase(route.length() - 2);
-
-      std::cout << route << "\n";
-   }
+   std::cout << format_path_into_string(shortest_path, source_city->get_city_name(), target_city->get_city_name(), shortest_distance);
 }
 
 /**

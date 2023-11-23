@@ -209,7 +209,7 @@ void CityGraph::print_neighbors(std::string target_city_code)
 
    for (const auto &neighbor : city->fetch_neighbors())
    {
-      std::cout << neighbor.first->fetch_city_name() << " " << std::endl;
+      std::cout << neighbor.first->get_city_name() << " " << std::endl;
    }
    std::cout << "\n";
 }
@@ -223,8 +223,8 @@ void CityGraph::print_shortest_path_between(std::string source_city_code, std::s
    CityNode *source_city = this->listCities[source_city_code];
    CityNode *target_city = this->listCities[target_city_code];
 
-   std::cout << "From City: " << source_city->fetch_city_name() << "\n";
-   std::cout << "To City: " << target_city->fetch_city_name() << "\n\n";
+   std::cout << "From City: " << source_city->get_city_name() << "\n";
+   std::cout << "To City: " << target_city->get_city_name() << "\n\n";
 
    // Find the shortest path between source and target
    std::pair<std::vector<std::string>, unsigned> shortest_path_collection = find_shortest_path_between(source_city, target_city);
@@ -234,11 +234,11 @@ void CityGraph::print_shortest_path_between(std::string source_city_code, std::s
    // Print out the shortest route from the source city to the target city
    if (!shortest_path.size())
    {
-      std::cout << "No route from " << source_city->fetch_city_name() << " to " << target_city->fetch_city_name() << "\n";
+      std::cout << "No route from " << source_city->get_city_name() << " to " << target_city->get_city_name() << "\n";
    }
    else
    {
-      std::cout << "The shortest distance from " << source_city->fetch_city_name() << " to " << target_city->fetch_city_name() << " is " << std::to_string(shortest_distance) << "\n";
+      std::cout << "The shortest distance from " << source_city->get_city_name() << " to " << target_city->get_city_name() << " is " << std::to_string(shortest_distance) << "\n";
       std::string route;
       for (std::string city : shortest_path)
       {
@@ -327,7 +327,7 @@ std::vector<std::string> CityGraph::construct_shortest_path(std::unordered_map<C
    // Traverse through the shortest path, and append the city name to the shortest path
    while (current_city != nullptr)
    {
-      shortest_path.push_back(current_city->fetch_city_name());
+      shortest_path.push_back(current_city->get_city_name());
       current_city = previous_city[current_city];
    }
 

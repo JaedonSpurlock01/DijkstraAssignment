@@ -34,7 +34,6 @@ public:
         this->_total_neighbors++;
     }
     std::list<std::pair<CityNode *, unsigned>> fetch_neighbors() { return this->neighbors; }
-    std::string fetch_city_name() { return this->_city_name; }
     void delete_neighbor(CityNode *city) { this->delete_neighbor_at(this->search_neighbor(city)); }
     std::pair<CityNode *, unsigned> get_neighbor(CityNode *city) { return this->get_neighbor_at(this->search_neighbor(city)); }
     int get_total_neighbors() { return this->_total_neighbors; }

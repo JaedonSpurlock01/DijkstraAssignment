@@ -31,7 +31,6 @@ std::pair<CityNode *, unsigned> CityNode::get_neighbor_at(int index)
  */
 int CityNode::search_neighbor(CityNode *city)
 {
-
    int index = 0;
    for (auto it = this->neighbors.begin(); it != this->neighbors.end(); it++, index++)
    {
@@ -51,7 +50,6 @@ int CityNode::search_neighbor(CityNode *city)
  */
 bool CityNode::delete_neighbor_at(int index)
 {
-
    int i = 0;
    for (auto it = this->neighbors.begin(); it != this->neighbors.end(); ++it, ++i)
    {
@@ -97,7 +95,6 @@ void CityGraph::add_multiple_cities(std::vector<std::vector<std::string>> list_o
  */
 void CityGraph::delete_city(std::string id)
 {
-   // Given a list, must delete a node using a id.
    CityNode *city = this->listCities[id];
 
    int neighbors = city->get_total_neighbors();
@@ -153,8 +150,6 @@ void CityGraph::add_multiple_connections(std::vector<std::vector<unsigned>> list
  */
 void CityGraph::delete_connection(std::string source_city_code, std::string target_city_code)
 {
-   // IMPLEMENT: Given two nodes erase the connection between them. Iterate thru source's neighbors to find target and reset it to something else
-
    CityNode *source = this->listCities[source_city_code];
    CityNode *target = this->listCities[target_city_code];
 
